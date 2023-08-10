@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container mt-4"  style="width: 500px; height: 300px">
+        <h1 style="text-align:center">Confirmação de E-mail</h1>
+        <hr>
+        <form method="POST" action="" class="border p-4 mt-2">
+            {{ form_confirmacao.csrf_token }}
+            <fieldset>
+                <div class="form-group">
+                    {{ form_confirmacao.codigo.label(class = "form-control-label") }}
+                    {% if form_confirmacao.codigo.errors and 'botao_submit' in request.form %}
+                        {{ form_confirmacao.codigo(class = "form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_confirmacao.codigo.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form_confirmacao.codigo(class = "form-control") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            {{ form_confirmacao.botao_submit(class = "btn btn-primary mt-2") }}
+        </form>
+    </div>
+{% endblock %}

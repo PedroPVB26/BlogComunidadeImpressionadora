@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container mt-4"  style="width: 500px; height: 300px">
+        <h1 style="text-align:center">Confirmar Código de Reuperação</h1>
+        <hr>
+        <form method="POST" action="" class="border p-4 mt-2">
+            {{ form.csrf_token }}
+            <fieldset>
+                <div class="form-group">
+                    {{ form.codigo.label(class = "form-control-label") }}
+                    {% if form.codigo.errors and 'botao_submit' in request.form %}
+                        {{ form.codigo(class = "form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form.codigo.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.codigo(class = "form-control") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            {{ form.botao_submit(class = "btn btn-primary mt-2") }}
+        </form>
+    </div>
+{% endblock %}
